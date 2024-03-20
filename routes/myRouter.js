@@ -23,7 +23,7 @@ router.get("/form", (req, res) => {
     res.sendFile(formpage)
 })
 
-router.get("/testobject", (req, res) => {
+router.get("/AnimeList", (req, res) => {
     res.status(200)
     // const product = [
     //     {
@@ -37,7 +37,7 @@ router.get("/testobject", (req, res) => {
     // ]
 
     Product.find().exec((err, doc) => {
-        res.render('testObjectPage.ejs', { productsA: doc })
+        res.render('AnimeList.ejs', { productsA: doc })
     })
 
 })
