@@ -7,7 +7,7 @@ const homepage = path.join(__dirname, '../pages/home.html')
 const formpage = path.join(__dirname, '../pages/form.html')
 const testObjectPage = path.join(__dirname, '../pages/testObjectPage.html')
 
-const Product = require('../models/productsA')
+const Product = require('../models/products')
 
 
 
@@ -42,6 +42,19 @@ router.get("/AnimeList", (req, res) => {
 
 })
 
+router.get("/delete/:id", (req, res) => {
+    res.status(200)
+
+    Product.findByIdAndDelete(req.params.id, { useFindAndModify: false }).exec(err => {
+        if (err) {
+            console.log(err)
+        }
+        res.redirect('/AnimeList')
+    })
+
+
+})
+
 // method  - GET -
 
 // router.get("/recieveForm", (req, res) => {
@@ -68,5 +81,7 @@ router.post("/recieveForm", (req, res) => {
     })
 
 })
+
+
 
 module.exports = router
