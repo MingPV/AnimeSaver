@@ -13,8 +13,16 @@ const Product = require('../models/products')
 
 router.get("/", (req, res) => {
     res.status(200)
-    res.type('text/html')
-    res.sendFile(homepage)
+    // res.type('text/html')
+    // res.sendFile(homepage)
+    res.json({ "foo": "bar", "name": "Mingming", "age": 19 });
+})
+
+router.get("/abc", (req, res) => {
+    res.status(200)
+    // res.type('text/html')
+    // res.sendFile(homepage)
+    res.json({ "foo": "bar", "name": "abc", "age": 18 });
 })
 
 router.get("/form", (req, res) => {
@@ -37,13 +45,15 @@ router.get("/AnimeList", (req, res) => {
     // ]
 
     Product.find().exec((err, doc) => {
-        res.render('AnimeList.ejs', { productsA: doc })
+        res.send({ doc })
+        // res.render('AnimeList.ejs', { productsA: doc })
     })
 
 })
 
 router.get("/delete/:id", (req, res) => {
     res.status(200)
+    console.log(req.params.id)
 
     Product.findByIdAndDelete(req.params.id, { useFindAndModify: false }).exec(err => {
         if (err) {
