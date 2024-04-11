@@ -10,6 +10,8 @@ function Form() {
 
     return (
         <>
+            <div><a href="/Home">Back to Home</a></div>
+            <br />
             <div>
                 <AnimeForm animeList={animeList} setAnimeList={setAnimeList} />
             </div>
