@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AnimeProps } from "../interfaces/AnimeProps";
 import AnimeForm from "../components/AnimeForm";
 import ListofAnime from "../components/ListofAnime";
+import videoBG from '../assets/videoBG.mp4'
 
 
 function Home() {
@@ -12,13 +13,10 @@ function Home() {
 
     return (
         <>
-            <div><a href="/Home">Back to Home</a></div>
-            <br />
-            <div className="AnimeForm" style={{ textAlign: "center", paddingTop: 250 }}>
+            <div className="AnimeForm" style={{ textAlign: "center" }}>
                 <AnimeForm animeList={animeList} setAnimeList={setAnimeList} />
             </div>
             <div><ListofAnime /></div>
-
         </>
     )
 }

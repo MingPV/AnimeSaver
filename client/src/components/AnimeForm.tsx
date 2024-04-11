@@ -3,7 +3,7 @@ import axios from "axios";
 
 import { AnimeProps } from "../interfaces/AnimeProps";
 
-import { TextField } from "@mui/material"
+import { colors, TextField } from "@mui/material"
 import Button from '@mui/joy/Button';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 

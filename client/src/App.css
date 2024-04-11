@@ -1,0 +1,11 @@
+.AnimeForm {
+  height: 160px;
+  width: 390px;
+  background: transparent;
+  border: 1px solid #5b6463;
+  border-radius: 100px;
+  box-shadow: 0 0 10px rgb(227, 243, 246);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
