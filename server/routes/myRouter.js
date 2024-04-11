@@ -30,16 +30,35 @@ router.get("/AnimeList", (req, res) => {
 
 })
 
-router.get("/delete/:id", (req, res) => {
-    res.status(200)
-    console.log(req.params.id)
+// router.get("/delete/:id", (req, res) => {
+//     res.status(200)
+//     console.log(req.params.id)
 
-    Product.findByIdAndDelete(req.params.id, { useFindAndModify: false }).exec(err => {
+//     Product.findByIdAndDelete(req.params.id, { useFindAndModify: false }).exec(err => {
+//         if (err) {
+//             console.log(err)
+//         }
+//         res.redirect('/AnimeList')
+//     })
+
+
+// })
+
+router.post("/deleteAnime", async (req, res) => {
+
+    const animeid = req.body.deleteId;
+    console.log(req.body.deleteId);
+
+    Product.deleteOne({ _id: animeid }).exec(err => {
         if (err) {
             console.log(err)
         }
-        res.redirect('/AnimeList')
+        res.redirect('/')
     })
+
+
+
+    res.status(200)
 
 
 })

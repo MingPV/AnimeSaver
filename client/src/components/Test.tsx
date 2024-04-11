@@ -1,8 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import axios from 'axios';
 
 interface Anime {
     animeName: string;
     point: number;
+    _id: number;
 }
 
 function Test() {
@@ -12,6 +14,10 @@ function Test() {
     const [name2, setname2] = useState();
     const [age2, setage2] = useState();
     const [animes, setanimes] = useState<Anime[]>([]);
+
+    useEffect(() => {
+        getdata3();
+    })
 
     async function getdata() {
         const data = await fetch("http://localhost:3000/").then((r) => r.json());
@@ -31,9 +37,27 @@ function Test() {
         setanimes(data.doc);
     }
 
+    const handleDelete = (id: number) => {
+        const url = "http://localhost:3000/deleteAnime";
+        console.log(id)
+        axios.post(url, {
+            deleteId: id,
+        }).then(res => {
+            console.log(res.data)
+        })
+        getdata3(); // for refresh data
+
+    }
+
     const animelist = animes.map((anime, index) => {
         return (
-            <div key={index}><li>{anime.animeName}</li></div>
+            <>
+                <div key={index}>
+                    <li>{anime.animeName}</li>
+                    <button onClick={() => handleDelete(anime._id)}>delete</button>
+                </div>
+
+            </>
         );
     })
 
