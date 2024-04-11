@@ -1,17 +1,15 @@
-import { useState, FC, ChangeEvent, Dispatch, SetStateAction, useEffect } from "react";
+import { useState, FC, ChangeEvent, Dispatch, SetStateAction } from "react";
 import axios from "axios";
 
 import { AnimeProps } from "../interfaces/AnimeProps";
 
+import { TextField } from "@mui/material"
+import Button from '@mui/joy/Button';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+
 interface Props {
     animeList: AnimeProps["animeList"],
     setAnimeList: Dispatch<SetStateAction<AnimeProps["animeList"]>>
-}
-
-interface Anime {
-    animeName: string;
-    point: number;
-    _id: number;
 }
 
 const AnimeForm: FC<Props> = ({ animeList, setAnimeList }) => {
@@ -19,12 +17,6 @@ const AnimeForm: FC<Props> = ({ animeList, setAnimeList }) => {
 
     const [name, setName] = useState("");
     const [point, setPoint] = useState<AnimeProps | any>(0);
-
-    const [animes, setanimes] = useState<Anime[]>([]);
-
-    useEffect(() => {
-        getdata3();
-    })
 
     const setNameinputHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setName(event.target.value);
@@ -51,56 +43,27 @@ const AnimeForm: FC<Props> = ({ animeList, setAnimeList }) => {
 
         setAnimeList([...animeList, animeData])
         setName("");
-        setPoint(0);
-
-        getdata3(); // for refresh data
-
+        setPoint("");
     }
-
-    async function getdata3() {
-        const data = await fetch("http://localhost:3000/AnimeList").then((r) => r.json());
-        setanimes(data.doc);
-    }
-
-    const handleDelete = (id: number) => {
-        const url = "http://localhost:3000/deleteAnime";
-        console.log(id)
-        axios.post(url, {
-            deleteId: id,
-        }).then(res => {
-            console.log(res.data)
-        })
-        getdata3(); // for refresh data
-
-    }
-
-    const animelist = animes.map((anime, index) => {
-        return (
-            <>
-                <div key={index}>
-                    <li>{anime.animeName}</li>
-                    <button onClick={() => handleDelete(anime._id)}>delete</button>
-                </div>
-
-            </>
-        );
-    })
-
 
     return (
         <>
             <form onSubmit={handleSubmit}>
-                <input type="text" value={name} name="name" onChange={setNameinputHandler} placeholder="Anime name" />
-                <input type="number" value={point} name="point" onChange={setPointinputHandler} placeholder="point" />
-                <div><button type="submit">Save</button></div>
+                {/* <input type="text" value={name} name="name" onChange={setNameinputHandler} placeholder="Anime name" /> */}
+                <div><TextField id="standard-basic" label="Anime name" variant="standard" value={name} name="name" type="text" onChange={setNameinputHandler} /></div>
+                {/* <div><TextField id="standard-basic" label="point" variant="standard" value={point} name="point" type="number" onChange={setPointinputHandler} /></div> */}
+                <div style={{ paddingTop: 15 }}>
+                    <Button color="primary"
+                        disabled={false}
+                        loading={false}
+                        type="submit"
+                        size="sm"
+                        variant="soft"
+                        startDecorator={<FavoriteIcon fontSize="inherit" />}>
+                        Save
+                    </Button>
+                </div>
             </form>
-            <br />
-            <br />
-            <div>
-                <ul>
-                    {animelist}
-                </ul>
-            </div>
         </>
     )
 }

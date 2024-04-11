@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 
 import Home from './pages/Home';
-import Form from './pages/Form';
 
 function App() {
 
@@ -14,7 +13,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Home" element={<Home />} />
-          <Route path="/form" element={<Form />} />
         </Routes>
       </BrowserRouter>
     </div>
