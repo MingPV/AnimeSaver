@@ -1,15 +1,23 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import './App.css'
 
-import Test from './components/Test'
+import Home from './pages/Home';
+import Form from './pages/Form';
 
 function App() {
 
   return (
-    <>
-      <div>
-        <div><Test /></div>
-      </div>
-    </>
+    <div className='App'>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/form" element={<Form />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+
   )
 }
 
