@@ -4,7 +4,7 @@ import { useState } from "react";
 import { AnimeProps } from "../interfaces/AnimeProps";
 import AnimeForm from "../components/AnimeForm";
 import ListofAnime from "../components/ListofAnime";
-import videoBG from '../assets/videoBG.mp4'
+import DrawerFilters from "../components/DrawerFilters";
 
 
 function Home() {
@@ -16,7 +16,7 @@ function Home() {
             <div className="AnimeForm" style={{ textAlign: "center" }}>
                 <AnimeForm animeList={animeList} setAnimeList={setAnimeList} />
             </div>
-            <div><ListofAnime /></div>
+            <div style={{ position: 'absolute', paddingTop: 15, paddingLeft: 150 }}><DrawerFilters /></div>
         </>
     )
 }
