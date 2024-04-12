@@ -17,6 +17,8 @@ import { Icon } from '@mui/material';
 import Textarea from '@mui/joy/Textarea';
 import Form from 'react-bootstrap/Form';
 import Snackbar from '@mui/joy/Snackbar';
+import Alert from '@mui/material/Alert';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
 interface Props {
     animeList: AnimeProps["animeList"],
@@ -29,6 +31,7 @@ interface Props {
 const SubmitModal: FC<Props> = ({ animeList, setAnimeList, animeName, setNameInForm }) => {
     const [open, setOpen] = React.useState<boolean>(false);
     const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [AlertsnackbarOpen, setAlertSnackbarOpen] = useState(false);
 
     const url = "http://localhost:3000/recieveForm";
 
@@ -70,10 +73,14 @@ const SubmitModal: FC<Props> = ({ animeList, setAnimeList, animeName, setNameInF
         setSnackbarOpen(true)
     }
 
+    const handleAlert = () => {
+        setAlertSnackbarOpen(true)
+    }
+
 
     return (
         <React.Fragment>
-            <Button variant="plain" color="neutral" onClick={() => { if (!name) { alert("Please enter Anime name.") } else { console.log(name); setOpen(true); } }} startDecorator={<FavoriteIcon fontSize="inherit" />}>
+            <Button variant="plain" color="neutral" onClick={() => { if (!name) { setAlertSnackbarOpen(true) } else { console.log(name); setOpen(true); } }} startDecorator={<FavoriteIcon fontSize="inherit" />}>
                 Save your anime
             </Button>
             <Transition in={open} timeout={400}>
@@ -150,6 +157,27 @@ const SubmitModal: FC<Props> = ({ animeList, setAnimeList, animeName, setNameInF
             >
                 Your message was sent successfully.
             </Snackbar>
+            <Snackbar
+                variant="soft"
+                color="danger"
+                open={AlertsnackbarOpen}
+                onClose={() => setAlertSnackbarOpen(false)}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                startDecorator={<ErrorOutlineIcon />}
+                endDecorator={
+                    <Button
+                        onClick={() => setAlertSnackbarOpen(false)}
+                        size="sm"
+                        variant="soft"
+                        color="danger"
+                    >
+                        Dismiss
+                    </Button>
+                }
+            >
+                You haven't entered an anime name yet.
+            </Snackbar>
+
 
         </React.Fragment>
     );
