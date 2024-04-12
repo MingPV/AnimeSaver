@@ -28,11 +28,11 @@ import MeetingRoomRoundedIcon from '@mui/icons-material/MeetingRoomRounded';
 import HotelRoundedIcon from '@mui/icons-material/HotelRounded';
 import Done from '@mui/icons-material/Done';
 import MenuIcon from '@mui/icons-material/Menu';
+import HourglassTopIcon from '@mui/icons-material/HourglassTop';
 
 export default function DrawerFilters() {
     const [open, setOpen] = React.useState(false);
     const [type, setType] = React.useState('Guesthouse');
-    const [amenities, setAmenities] = React.useState([0, 6]);
 
     return (
         <React.Fragment>
@@ -70,13 +70,13 @@ export default function DrawerFilters() {
                         overflow: 'auto',
                     }}
                 >
-                    <DialogTitle>Filters</DialogTitle>
+                    <DialogTitle>Menu</DialogTitle>
                     <ModalClose />
                     <Divider sx={{ mt: 'auto' }} />
                     <DialogContent sx={{ gap: 2 }}>
                         <FormControl>
                             <FormLabel sx={{ typography: 'title-md', fontWeight: 'bold' }}>
-                                Property type
+                                Features
                             </FormLabel>
                             <RadioGroup
                                 value={type || ''}
@@ -93,20 +93,20 @@ export default function DrawerFilters() {
                                 >
                                     {[
                                         {
-                                            name: 'House',
+                                            name: 'AnimeList',
                                             icon: <HomeRoundedIcon />,
                                         },
                                         {
-                                            name: 'Apartment',
-                                            icon: <ApartmentRoundedIcon />,
+                                            name: 'Coming soon',
+                                            icon: <HourglassTopIcon />,
                                         },
                                         {
-                                            name: 'Guesthouse',
-                                            icon: <MeetingRoomRoundedIcon />,
+                                            name: 'Coming soon',
+                                            icon: <HourglassTopIcon />,
                                         },
                                         {
-                                            name: 'Hotel',
-                                            icon: <HotelRoundedIcon />,
+                                            name: 'Coming soon',
+                                            icon: <HourglassTopIcon />,
                                         },
                                     ].map((item) => (
                                         <Card
@@ -121,6 +121,7 @@ export default function DrawerFilters() {
                                                 <Typography level="title-md">{item.name}</Typography>
                                             </CardContent>
                                             <Radio
+
                                                 disableIcon
                                                 overlay
                                                 checked={type === item.name}
@@ -149,74 +150,18 @@ export default function DrawerFilters() {
                             </RadioGroup>
                         </FormControl>
 
-                        <Typography level="title-md" fontWeight="bold" sx={{ mt: 1 }}>
-                            Amenities
-                        </Typography>
-                        <div role="group" aria-labelledby="rank">
-                            <List
-                                orientation="horizontal"
-                                size="sm"
-                                sx={{
-                                    '--List-gap': '12px',
-                                    '--ListItem-radius': '20px',
-                                }}
-                            >
-                                {['Wi-fi', 'Washer', 'A/C', 'Kitchen'].map((item, index) => {
-                                    const selected = amenities.includes(index);
-                                    return (
-                                        <ListItem key={item}>
-                                            <AspectRatio
-                                                variant={selected ? 'solid' : 'outlined'}
-                                                color={selected ? 'primary' : 'neutral'}
-                                                ratio={1}
-                                                sx={{ width: 20, borderRadius: 20, ml: -0.5, mr: 0.75 }}
-                                            >
-                                                <div>{selected && <Done />}</div>
-                                            </AspectRatio>
-                                            <Checkbox
-                                                size="sm"
-                                                color="neutral"
-                                                disableIcon
-                                                overlay
-                                                label={item}
-                                                variant="outlined"
-                                                checked={selected}
-                                                onChange={(event) =>
-                                                    setAmenities((prev) => {
-                                                        const set = new Set([...prev, index]);
-                                                        if (!event.target.checked) {
-                                                            set.delete(index);
-                                                        }
-                                                        // @ts-ignore
-                                                        return [...set];
-                                                    })
-                                                }
-                                                slotProps={{
-                                                    action: {
-                                                        sx: {
-                                                            '&:hover': {
-                                                                bgcolor: 'transparent',
-                                                            },
-                                                        },
-                                                    },
-                                                }}
-                                            />
-                                        </ListItem>
-                                    );
-                                })}
-                            </List>
-                        </div>
+                        <hr />
 
                         <Typography level="title-md" fontWeight="bold" sx={{ mt: 2 }}>
-                            Booking options
+                            Website Effects
                         </Typography>
                         <FormControl orientation="horizontal">
                             <Box sx={{ flex: 1, pr: 1 }}>
                                 <FormLabel sx={{ typography: 'title-sm' }}>
-                                    Instant booking
+                                    Dark mode
                                 </FormLabel>
                                 <FormHelperText sx={{ typography: 'body-sm' }}>
-                                    Listings that you can book without waiting for host approval.
+                                    Coming soon.
                                 </FormHelperText>
                             </Box>
                             <Switch />
@@ -224,9 +169,9 @@ export default function DrawerFilters() {
 
                         <FormControl orientation="horizontal">
                             <Box sx={{ flex: 1, mt: 1, mr: 1 }}>
-                                <FormLabel sx={{ typography: 'title-sm' }}>Self check-in</FormLabel>
+                                <FormLabel sx={{ typography: 'title-sm' }}>Coming soon</FormLabel>
                                 <FormHelperText sx={{ typography: 'body-sm' }}>
-                                    Easy access to the property when you arrive.
+                                    Coming soon.
                                 </FormHelperText>
                             </Box>
                             <Switch />
@@ -245,12 +190,11 @@ export default function DrawerFilters() {
                             color="neutral"
                             onClick={() => {
                                 setType('');
-                                setAmenities([]);
                             }}
                         >
                             Clear
                         </Button>
-                        <Button onClick={() => setOpen(false)}>Show 165 properties</Button>
+                        <Button onClick={() => setOpen(false)}>Save</Button>
                     </Stack>
                 </Sheet>
             </Drawer>

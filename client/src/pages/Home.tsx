@@ -17,6 +17,7 @@ function Home() {
                 <AnimeForm animeList={animeList} setAnimeList={setAnimeList} />
             </div>
             <div style={{ position: 'absolute', paddingTop: 15, paddingLeft: 150 }}><DrawerFilters /></div>
+
         </>
     )
 }
