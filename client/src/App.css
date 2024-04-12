@@ -9,3 +9,7 @@
   align-items: center;
   justify-content: center;
 }
+
+.snackbar {
+  padding-right: 100px;
+}

@@ -4,6 +4,7 @@ import axios from 'axios';
 interface Anime {
     animeName: string;
     point: number;
+    description: string;
     _id: number;
 }
 

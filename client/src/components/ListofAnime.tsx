@@ -4,6 +4,7 @@ import axios from "axios";
 interface Anime {
     animeName: string;
     point: number;
+    description: string;
     _id: number;
 }
 
@@ -37,6 +38,8 @@ const ListofAnime = () => {
             <>
                 <div key={index}>
                     <li>{anime.animeName}</li>
+                    <li>{anime.point}</li>
+                    <li>{anime.description}</li>
                     <button onClick={() => handleDelete(anime._id)}>delete</button>
                 </div>
 
