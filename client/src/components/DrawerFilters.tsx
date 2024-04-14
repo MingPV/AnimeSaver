@@ -33,6 +33,7 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import PublicIcon from '@mui/icons-material/Public';
 import PersonIcon from '@mui/icons-material/Person';
 import ListofAnime from './ListofAnime';
+import BarChart from '@mui/icons-material/BarChart';
 
 export default function DrawerFilters() {
     const [open, setOpen] = React.useState(false);
@@ -295,9 +296,14 @@ export default function DrawerFilters() {
                     <ModalClose />
                     <Divider sx={{ mt: 'auto' }} />
 
-                    <DialogContent sx={{ gap: 2 }}>
-
-                    </DialogContent>
+                    {/* <DialogContent sx={{ gap: 2 }}>
+                        <div><BarChart
+                            xAxis={[{ scaleType: 'band', data: ['group A', 'group B', 'group C'] }]}
+                            series={[{ data: [4, 3, 5] }, { data: [1, 6, 3] }, { data: [2, 5, 6] }]}
+                            width={500}
+                            height={300}
+                        /></div>
+                    </DialogContent> */}
 
                     <Divider sx={{ mt: 'auto' }} />
 
