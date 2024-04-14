@@ -12,6 +12,8 @@ mongoose.connect(dbURL, {
 let productSchema = mongoose.Schema({
     animeName: String,
     point: Number,
+    type: String,
+    description: String,
 })
 
 // create model

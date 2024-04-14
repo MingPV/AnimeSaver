@@ -53,10 +53,12 @@ router.post("/recieveForm", async (req, res) => {
 
     let data = new Product({
         animeName: req.body.name,
-        point: req.body.point
+        point: req.body.point,
+        type: req.body.type,
+        description: req.body.description,
     })
 
-    console.log(data)
+    //console.log(data)
 
     await Product.saveProduct(data, (err) => {
         if (err) console.log(err)

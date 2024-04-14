@@ -37,10 +37,10 @@ const ListofAnime = () => {
         return (
             <>
                 <div key={index}>
-                    <li>{anime.animeName}</li>
-                    <li>{anime.point}</li>
-                    <li>{anime.description}</li>
-                    <button onClick={() => handleDelete(anime._id)}>delete</button>
+                    <li>name : {anime.animeName}</li>
+                    <p>description : {anime.description}</p>
+                    <button style={{ backgroundColor: "whitesmoke", borderRadius: 5, height: 30, width: 50, fontSize: 12, fontFamily: "monospace" }} onClick={() => handleDelete(anime._id)}>delete</button>
+                    <hr />
                 </div>
 
             </>

@@ -58,6 +58,7 @@ const SubmitModal: FC<Props> = ({ animeList, setAnimeList, animeName, setNameInF
         axios.post(url, {
             name: name,
             point: point,
+            type: "Not implement yet (create function in SubmitModal() in components)",
             description: description
         }).then(res => {
             console.log(res.data)
