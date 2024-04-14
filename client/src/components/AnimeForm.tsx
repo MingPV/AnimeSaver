@@ -32,6 +32,7 @@ const AnimeForm: FC<Props> = ({ animeList, setAnimeList }) => {
                     <SubmitModal animeList={animeList} setAnimeList={setAnimeList} animeName={name} setNameInForm={setName} />
                 </div>
 
+
             </div>
         </>
     )

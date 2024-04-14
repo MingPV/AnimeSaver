@@ -19,6 +19,12 @@ import Form from 'react-bootstrap/Form';
 import Snackbar from '@mui/joy/Snackbar';
 import Alert from '@mui/material/Alert';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import Checkbox from '@mui/joy/Checkbox';
+import List from '@mui/joy/List';
+import ListItem from '@mui/joy/ListItem';
+import Typography from '@mui/joy/Typography';
+import Sheet from '@mui/joy/Sheet';
+import Done from '@mui/icons-material/Done';
 
 interface Props {
     animeList: AnimeProps["animeList"],
@@ -39,6 +45,8 @@ const SubmitModal: FC<Props> = ({ animeList, setAnimeList, animeName, setNameInF
     const [point, setPoint] = useState<AnimeProps | any>(0);
     const [description, setDescription] = useState("");
 
+    const [genre, setGenre] = React.useState<string[]>([]);
+
     useEffect(() => {
         setName(animeName)
     })
@@ -58,7 +66,7 @@ const SubmitModal: FC<Props> = ({ animeList, setAnimeList, animeName, setNameInF
         axios.post(url, {
             name: name,
             point: point,
-            type: "Not implement yet (create function in SubmitModal() in components)",
+            type: genre,
             description: description
         }).then(res => {
             console.log(res.data)
@@ -69,9 +77,12 @@ const SubmitModal: FC<Props> = ({ animeList, setAnimeList, animeName, setNameInF
         setNameInForm("");
         setPoint("");
         setDescription("")
+        setGenre([])
 
         setOpen(false);
         setSnackbarOpen(true)
+
+        // console.log(value)
     }
 
     const handleAlert = () => {
@@ -84,6 +95,7 @@ const SubmitModal: FC<Props> = ({ animeList, setAnimeList, animeName, setNameInF
             <Button variant="plain" color="neutral" onClick={() => { if (!name) { setAlertSnackbarOpen(true) } else { console.log(name); setOpen(true); } }} startDecorator={<FavoriteIcon fontSize="inherit" />}>
                 Save your anime
             </Button>
+
             <Transition in={open} timeout={400}>
                 {(state: string) => (
                     <Modal
@@ -115,29 +127,99 @@ const SubmitModal: FC<Props> = ({ animeList, setAnimeList, animeName, setNameInF
                                 entered: { opacity: 1 },
                             }[state],
                         }}>
+
                             <DialogTitle>Create a new memory</DialogTitle>
                             <DialogContent>Tell something to yourself in the future about this anime.</DialogContent>
-                            <form
-                                onSubmit={handleSubmit}
-                            >
-                                <Stack spacing={2}>
-                                    {/* <FormControl>
+                            <div>
+                                <div >
+                                    <form
+                                        onSubmit={handleSubmit}
+                                    >
+                                        <Stack spacing={0}>
+                                            {/* <FormControl>
                                         <FormLabel>Point</FormLabel>
                                         <Input autoFocus required value={point} name="point" type="number" onChange={setPointinputHandler} />
                                     </FormControl> */}
-                                    <FormControl>
-                                        <FormLabel>Description</FormLabel>
-                                        <Form.Control as="textarea" rows={3} value={description} name="description" type="text" onChange={setDescriptioninputHandler} />
+                                            <FormControl>
+                                                <FormLabel>Description</FormLabel>
+                                                <Form.Control as="textarea" rows={3} value={description} name="description" type="text" onChange={setDescriptioninputHandler} />
 
-                                    </FormControl>
-                                    <Button type="submit">Submit</Button>
+                                            </FormControl>
 
-                                </Stack>
-                            </form>
+                                            <Sheet variant="plain" sx={{ width: 500, p: 2, borderRadius: 'sm', paddingBottom: 3 }}>
+                                                <Typography id="rank" level="body-sm" fontWeight="lg" sx={{ mb: 1.5 }}>
+                                                    Choose Genre
+                                                </Typography>
+                                                <div role="group" aria-labelledby="rank" style={{}}>
+                                                    <List
+                                                        orientation="horizontal"
+                                                        wrap
+                                                        sx={{
+                                                            '--List-gap': '8px',
+                                                            '--ListItem-radius': '20px',
+                                                            '--ListItem-minHeight': '32px',
+                                                            '--ListItem-gap': '4px',
+                                                        }}
+                                                    >
+                                                        {['Action', 'Adventure', 'Comedy', 'Drama', 'Sport', 'Fantasy', 'Horror', 'Phychological', 'Romance', 'Sci-Fi'].map(
+                                                            (item, index) => (
+                                                                <ListItem key={item}>
+                                                                    {genre.includes(item)}
+                                                                    <Checkbox
+                                                                        size="sm"
+                                                                        // disabled={index === 0}
+                                                                        disableIcon
+                                                                        overlay
+                                                                        label={item}
+                                                                        checked={genre.includes(item)}
+                                                                        variant={genre.includes(item) ? 'soft' : 'outlined'}
+                                                                        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                                                                            if (event.target.checked) {
+                                                                                setGenre((val) => [...val, item]);
+                                                                            } else {
+                                                                                setGenre((val) => val.filter((text) => text !== item));
+                                                                            }
+                                                                        }}
+                                                                        slotProps={{
+                                                                            action: ({ checked }) => ({
+                                                                                sx: checked
+                                                                                    ? {
+                                                                                        border: '1px solid',
+                                                                                        borderColor: 'primary.500',
+                                                                                    }
+                                                                                    : {},
+                                                                            }),
+                                                                        }}
+                                                                    />
+                                                                </ListItem>
+                                                            ),
+                                                        )}
+                                                    </List>
+                                                </div>
+                                            </Sheet>
+                                            <Button type="submit">Submit</Button>
+
+                                        </Stack>
+                                    </form>
+
+
+
+                                </div>
+
+                            </div>
+
+
+
+
                         </ModalDialog>
                     </Modal>
                 )}
             </Transition>
+
+
+
+
+
             <Snackbar
                 variant="soft"
                 color="success"
