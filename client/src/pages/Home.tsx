@@ -5,6 +5,7 @@ import { AnimeProps } from "../interfaces/AnimeProps";
 import AnimeForm from "../components/AnimeForm";
 import ListofAnime from "../components/ListofAnime";
 import DrawerFilters from "../components/DrawerFilters";
+import DrawerList from "../components/DrawerList";
 
 
 function Home() {

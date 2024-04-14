@@ -29,10 +29,19 @@ import HotelRoundedIcon from '@mui/icons-material/HotelRounded';
 import Done from '@mui/icons-material/Done';
 import MenuIcon from '@mui/icons-material/Menu';
 import HourglassTopIcon from '@mui/icons-material/HourglassTop';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import PublicIcon from '@mui/icons-material/Public';
+import PersonIcon from '@mui/icons-material/Person';
+import ListofAnime from './ListofAnime';
 
 export default function DrawerFilters() {
     const [open, setOpen] = React.useState(false);
     const [type, setType] = React.useState('Guesthouse');
+    const [openList, setOpenList] = React.useState(false);
+    const [openStat, setOpenStat] = React.useState(false);
+    const [openCommunity, setOpenCommunity] = React.useState(false);
+    const [openProfile, setOpenProfile] = React.useState(false);
+
 
     return (
         <React.Fragment>
@@ -93,58 +102,73 @@ export default function DrawerFilters() {
                                 >
                                     {[
                                         {
-                                            name: 'AnimeList',
+                                            name: 'Anime List',
                                             icon: <HomeRoundedIcon />,
                                         },
                                         {
-                                            name: 'Coming soon',
-                                            icon: <HourglassTopIcon />,
+                                            name: 'Statistics',
+                                            icon: <BarChartIcon />,
                                         },
                                         {
-                                            name: 'Coming soon',
-                                            icon: <HourglassTopIcon />,
+                                            name: 'Community',
+                                            icon: <PublicIcon />,
                                         },
                                         {
-                                            name: 'Coming soon',
-                                            icon: <HourglassTopIcon />,
+                                            name: 'User Profile',
+                                            icon: <PersonIcon />,
                                         },
                                     ].map((item) => (
-                                        <Card
-                                            key={item.name}
-                                            sx={{
-                                                boxShadow: 'none',
-                                                '&:hover': { bgcolor: 'background.level1' },
-                                            }}
-                                        >
-                                            <CardContent>
-                                                {item.icon}
-                                                <Typography level="title-md">{item.name}</Typography>
-                                            </CardContent>
-                                            <Radio
+                                        <div onClick={
+                                            () => {
+                                                if (item.name == "Anime List") {
+                                                    setOpenList(true)
+                                                } else if (item.name == "Statistics") {
+                                                    setOpenStat(true);
+                                                } else if (item.name == "Community") {
+                                                    setOpenCommunity(true);
+                                                } else if (item.name == "User Profile") {
+                                                    setOpenProfile(true)
+                                                }
+                                            }
+                                        }>
+                                            <Card
+                                                key={item.name}
+                                                sx={{
+                                                    boxShadow: 'none',
+                                                    '&:hover': { bgcolor: 'background.level1' },
+                                                }}
+                                            >
+                                                <CardContent>
+                                                    {item.icon}
+                                                    <Typography level="title-md">{item.name}</Typography>
+                                                </CardContent>
+                                                <Radio
 
-                                                disableIcon
-                                                overlay
-                                                checked={type === item.name}
-                                                variant="outlined"
-                                                color="neutral"
-                                                value={item.name}
-                                                sx={{ mt: -2 }}
-                                                slotProps={{
-                                                    action: {
-                                                        sx: {
-                                                            ...(type === item.name && {
-                                                                borderWidth: 2,
-                                                                borderColor:
-                                                                    'var(--joy-palette-primary-outlinedBorder)',
-                                                            }),
-                                                            '&:hover': {
-                                                                bgcolor: 'transparent',
+                                                    disableIcon
+                                                    overlay
+                                                    checked={type === item.name}
+                                                    variant="outlined"
+                                                    color="neutral"
+                                                    value={item.name}
+                                                    sx={{ mt: -2 }}
+                                                    slotProps={{
+                                                        action: {
+                                                            sx: {
+                                                                ...(type === item.name && {
+                                                                    borderWidth: 2,
+                                                                    borderColor:
+                                                                        'var(--joy-palette-primary-outlinedBorder)',
+                                                                }),
+                                                                '&:hover': {
+                                                                    bgcolor: 'transparent',
+                                                                },
                                                             },
                                                         },
-                                                    },
-                                                }}
-                                            />
-                                        </Card>
+                                                    }}
+                                                />
+                                            </Card>
+                                        </div>
+
                                     ))}
                                 </Box>
                             </RadioGroup>
@@ -197,7 +221,168 @@ export default function DrawerFilters() {
                         <Button onClick={() => setOpen(false)}>Save</Button>
                     </Stack>
                 </Sheet>
+
             </Drawer>
+
+            <Drawer size="lg"
+                variant="plain"
+                anchor='left'
+                open={openList}
+                onClose={() => setOpenList(false)}
+                slotProps={{
+                    content: {
+                        sx: {
+                            bgcolor: 'transparent',
+                            p: { md: 3, sm: 0 },
+                            boxShadow: 'none',
+                        },
+                    },
+                }}>
+
+                <Sheet
+                    sx={{
+                        backgroundColor: 'white',
+                        borderRadius: 'md',
+                        p: 2,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 2,
+                        height: '100%',
+                        overflow: 'auto',
+                    }}
+                >
+                    <DialogTitle>Anime List</DialogTitle>
+                    <ModalClose />
+                    <Divider sx={{ mt: 'auto' }} />
+
+                    <DialogContent sx={{ gap: 2 }}>
+                        <ListofAnime />
+                    </DialogContent>
+
+                    <Divider sx={{ mt: 'auto' }} />
+
+                </Sheet>
+            </Drawer>
+
+            <Drawer size="lg"
+                variant="plain"
+                anchor='left'
+                open={openStat}
+                onClose={() => setOpenStat(false)}
+                slotProps={{
+                    content: {
+                        sx: {
+                            bgcolor: 'transparent',
+                            p: { md: 3, sm: 0 },
+                            boxShadow: 'none',
+                        },
+                    },
+                }}>
+
+                <Sheet
+                    sx={{
+                        backgroundColor: 'white',
+                        borderRadius: 'md',
+                        p: 2,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 2,
+                        height: '100%',
+                        overflow: 'auto',
+                    }}
+                >
+                    <DialogTitle>Statistics</DialogTitle>
+                    <ModalClose />
+                    <Divider sx={{ mt: 'auto' }} />
+
+                    <DialogContent sx={{ gap: 2 }}>
+
+                    </DialogContent>
+
+                    <Divider sx={{ mt: 'auto' }} />
+
+                </Sheet>
+            </Drawer>
+            <Drawer size="lg"
+                variant="plain"
+                anchor='left'
+                open={openCommunity}
+                onClose={() => setOpenCommunity(false)}
+                slotProps={{
+                    content: {
+                        sx: {
+                            bgcolor: 'transparent',
+                            p: { md: 3, sm: 0 },
+                            boxShadow: 'none',
+                        },
+                    },
+                }}>
+
+                <Sheet
+                    sx={{
+                        backgroundColor: 'white',
+                        borderRadius: 'md',
+                        p: 2,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 2,
+                        height: '100%',
+                        overflow: 'auto',
+                    }}
+                >
+                    <DialogTitle>Comminity</DialogTitle>
+                    <ModalClose />
+                    <Divider sx={{ mt: 'auto' }} />
+
+                    <DialogContent sx={{ gap: 2 }}>
+
+                    </DialogContent>
+
+                    <Divider sx={{ mt: 'auto' }} />
+
+                </Sheet>
+            </Drawer>
+            <Drawer size="md"
+                variant="plain"
+                anchor='left'
+                open={openProfile}
+                onClose={() => setOpenProfile(false)}
+                slotProps={{
+                    content: {
+                        sx: {
+                            bgcolor: 'transparent',
+                            p: { md: 3, sm: 0 },
+                            boxShadow: 'none',
+                        },
+                    },
+                }}>
+
+                <Sheet
+                    sx={{
+                        backgroundColor: 'white',
+                        borderRadius: 'md',
+                        p: 2,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 2,
+                        height: '100%',
+                        overflow: 'auto',
+                    }}
+                >
+                    <DialogTitle>User Profile</DialogTitle>
+                    <ModalClose />
+                    <Divider sx={{ mt: 'auto' }} />
+
+                    <DialogContent sx={{ gap: 2 }}>
+
+                    </DialogContent>
+
+                    <Divider sx={{ mt: 'auto' }} />
+
+                </Sheet>
+            </Drawer>
+
+
         </React.Fragment>
     );
 }
