@@ -33,7 +33,9 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import PublicIcon from '@mui/icons-material/Public';
 import PersonIcon from '@mui/icons-material/Person';
 import ListofAnime from './ListofAnime';
-import BarChart from '@mui/icons-material/BarChart';
+// import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from 'recharts';
+import { Radar, RadarChart, PolarGrid, Legend, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
+
 
 export default function DrawerFilters() {
     const [open, setOpen] = React.useState(false);
@@ -43,6 +45,69 @@ export default function DrawerFilters() {
     const [openCommunity, setOpenCommunity] = React.useState(false);
     const [openProfile, setOpenProfile] = React.useState(false);
 
+    //const data = [{ name: 'Page A', uv: 400, pv: 2400, amt: 2400 }, { name: 'Page A', uv: 400, pv: 2400, amt: 2400 }, { name: 'Page A', uv: 400, pv: 2400, amt: 2400 }, { name: 'Page A', uv: 400, pv: 2400, amt: 2400 }];
+    const data = [
+        {
+            subject: 'Action',
+            A: 120,
+            B: 110,
+            fullMark: 150,
+        },
+        {
+            subject: 'Adventure',
+            A: 98,
+            B: 130,
+            fullMark: 150,
+        },
+        {
+            subject: 'Comedy',
+            A: 86,
+            B: 130,
+            fullMark: 150,
+        },
+        {
+            subject: 'Drama',
+            A: 99,
+            B: 100,
+            fullMark: 150,
+        },
+        {
+            subject: 'Sport',
+            A: 85,
+            B: 90,
+            fullMark: 150,
+        },
+        {
+            subject: 'Fantasy',
+            A: 65,
+            B: 85,
+            fullMark: 150,
+        },
+        {
+            subject: 'Horror',
+            A: 65,
+            B: 85,
+            fullMark: 150,
+        },
+        {
+            subject: 'Phychological',
+            A: 65,
+            B: 85,
+            fullMark: 150,
+        },
+        {
+            subject: 'Romance',
+            A: 65,
+            B: 85,
+            fullMark: 150,
+        },
+        {
+            subject: 'Sci-Fi',
+            A: 65,
+            B: 85,
+            fullMark: 150,
+        },
+    ];
 
     return (
         <React.Fragment>
@@ -296,14 +361,18 @@ export default function DrawerFilters() {
                     <ModalClose />
                     <Divider sx={{ mt: 'auto' }} />
 
-                    {/* <DialogContent sx={{ gap: 2 }}>
-                        <div><BarChart
-                            xAxis={[{ scaleType: 'band', data: ['group A', 'group B', 'group C'] }]}
-                            series={[{ data: [4, 3, 5] }, { data: [1, 6, 3] }, { data: [2, 5, 6] }]}
-                            width={500}
-                            height={300}
-                        /></div>
-                    </DialogContent> */}
+                    <ResponsiveContainer width="100%" height="100%"  >
+                        <RadarChart cx="50%" cy="47%" outerRadius="80%" data={data}>
+                            <PolarGrid />
+                            <PolarAngleAxis dataKey="subject" />
+                            <PolarRadiusAxis angle={30} domain={[0, 150]} />
+                            <Radar name="Average" dataKey="B" stroke="#FFC9F6" fill="#FFC9F6" fillOpacity={0.6} />
+                            <Radar name="You" dataKey="A" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+                            <Legend />
+                        </RadarChart>
+                    </ResponsiveContainer>
+
+
 
                     <Divider sx={{ mt: 'auto' }} />
 
@@ -389,6 +458,6 @@ export default function DrawerFilters() {
             </Drawer>
 
 
-        </React.Fragment>
+        </React.Fragment >
     );
 }
