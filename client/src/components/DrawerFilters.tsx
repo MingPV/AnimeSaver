@@ -268,7 +268,7 @@ export default function DrawerFilters() {
                                             name: 'User Profile',
                                             icon: <PersonIcon />,
                                         },
-                                    ].map((item) => (
+                                    ].map((item, index) => (
                                         <div onClick={
                                             () => {
                                                 if (item.name == "Anime List") {
@@ -286,15 +286,16 @@ export default function DrawerFilters() {
                                                 key={item.name}
                                                 sx={{
                                                     boxShadow: 'none',
-                                                    '&:hover': { bgcolor: 'background.level1' },
+                                                    '&:hover': {
+                                                        bgcolor: 'background.level1'
+                                                    },
                                                 }}
                                             >
-                                                <CardContent>
+                                                <CardContent >
                                                     {item.icon}
                                                     <Typography level="title-md">{item.name}</Typography>
                                                 </CardContent>
                                                 <Radio
-
                                                     disableIcon
                                                     overlay
                                                     checked={type === item.name}
