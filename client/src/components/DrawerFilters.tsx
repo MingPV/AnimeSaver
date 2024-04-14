@@ -35,9 +35,23 @@ import PersonIcon from '@mui/icons-material/Person';
 import ListofAnime from './ListofAnime';
 // import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from 'recharts';
 import { Radar, RadarChart, PolarGrid, Legend, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
+import { useEffect, useState } from 'react';
+
+interface Anime {
+    animeName: string;
+    point: number;
+    description: string;
+    genre: [string];
+    _id: number;
+}
 
 
 export default function DrawerFilters() {
+    const [animes, setanimes] = useState<Anime[]>([]);
+    const [myGenre, setMyGenre] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    const [averageGenre, setAverageGenre] = useState([80, 70, 60, 70, 50, 70, 60, 70, 90, 60]);
+
+
     const [open, setOpen] = React.useState(false);
     const [type, setType] = React.useState('Guesthouse');
     const [openList, setOpenList] = React.useState(false);
@@ -46,68 +60,134 @@ export default function DrawerFilters() {
     const [openProfile, setOpenProfile] = React.useState(false);
 
     //const data = [{ name: 'Page A', uv: 400, pv: 2400, amt: 2400 }, { name: 'Page A', uv: 400, pv: 2400, amt: 2400 }, { name: 'Page A', uv: 400, pv: 2400, amt: 2400 }, { name: 'Page A', uv: 400, pv: 2400, amt: 2400 }];
+
+
+
+
+    // You:A  Average:B
+
     const data = [
         {
             subject: 'Action',
-            A: 120,
-            B: 110,
-            fullMark: 150,
+            A: myGenre[0],
+            B: averageGenre[0],
+            fullMark: 100,
         },
         {
             subject: 'Adventure',
-            A: 98,
-            B: 130,
-            fullMark: 150,
+            A: myGenre[1],
+            B: averageGenre[1],
+            fullMark: 100,
         },
         {
             subject: 'Comedy',
-            A: 86,
-            B: 130,
-            fullMark: 150,
+            A: myGenre[2],
+            B: averageGenre[2],
+            fullMark: 100,
         },
         {
             subject: 'Drama',
-            A: 99,
-            B: 100,
-            fullMark: 150,
+            A: myGenre[3],
+            B: averageGenre[3],
+            fullMark: 100,
         },
         {
             subject: 'Sport',
-            A: 85,
-            B: 90,
-            fullMark: 150,
+            A: myGenre[4],
+            B: averageGenre[4],
+            fullMark: 100,
         },
         {
             subject: 'Fantasy',
-            A: 65,
-            B: 85,
-            fullMark: 150,
+            A: myGenre[5],
+            B: averageGenre[5],
+            fullMark: 100,
         },
         {
             subject: 'Horror',
-            A: 65,
-            B: 85,
-            fullMark: 150,
+            A: myGenre[6],
+            B: averageGenre[6],
+            fullMark: 100,
         },
         {
             subject: 'Phychological',
-            A: 65,
-            B: 85,
-            fullMark: 150,
+            A: myGenre[7],
+            B: averageGenre[7],
+            fullMark: 100,
         },
         {
             subject: 'Romance',
-            A: 65,
-            B: 85,
-            fullMark: 150,
+            A: myGenre[8],
+            B: averageGenre[8],
+            fullMark: 100,
         },
         {
             subject: 'Sci-Fi',
-            A: 65,
-            B: 85,
-            fullMark: 150,
+            A: myGenre[9],
+            B: averageGenre[9],
+            fullMark: 100,
         },
     ];
+
+    useEffect(() => {
+        getdata3();
+    })
+
+    async function getdata3() {
+        const data = await fetch("http://localhost:3000/AnimeList").then((r) => r.json());
+        setanimes(data.doc);
+        calPercentGenre();
+        // console.log(myGenre)
+    }
+
+    async function calPercentGenre() {
+
+        let myAnimeCount = 0;
+        let myGenreX = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        // action adventure comedy drama ... sci-fi
+
+        //console.log(animes)
+
+        for (let i = 0; i < animes.length; i++) {
+            myAnimeCount++;
+            const anime = animes[i];
+            for (let j = 0; j < anime.genre.length; j++) {
+                const animegenre = anime.genre[j];
+                switch (animegenre) {
+                    case ("Action"): myGenreX[0]++;
+                        break;
+                    case ("Adventure"): myGenreX[1]++;
+                        break;
+                    case ("Comedy"): myGenreX[2]++;
+                        break;
+                    case ("Drama"): myGenreX[3]++;
+                        break;
+                    case ("Sport"): myGenreX[4]++;
+                        break;
+                    case ("Fantasy"): myGenreX[5]++;
+                        break;
+                    case ("Horror"): myGenreX[6]++;
+                        break;
+                    case ("Phychological"): myGenreX[7]++;
+                        break;
+                    case ("Romance"): myGenreX[8]++;
+                        break;
+                    case ("Sci-Fi"): myGenreX[9]++;
+                        break;
+                }
+            }
+        }
+
+        for (let i = 0; i < myGenre.length; i++) {
+            myGenreX[i] = (myGenreX[i] * 100) / myAnimeCount;
+            //console.log(tmp)
+            //console.log(myGenreX[i])
+            // console.log(myGenreX)
+        }
+
+        setMyGenre(myGenreX);
+
+    }
 
     return (
         <React.Fragment>
@@ -361,11 +441,11 @@ export default function DrawerFilters() {
                     <ModalClose />
                     <Divider sx={{ mt: 'auto' }} />
 
-                    <ResponsiveContainer width="100%" height="100%"  >
+                    <ResponsiveContainer width="100%" height="90%"  >
                         <RadarChart cx="50%" cy="47%" outerRadius="80%" data={data}>
                             <PolarGrid />
                             <PolarAngleAxis dataKey="subject" />
-                            <PolarRadiusAxis angle={30} domain={[0, 150]} />
+                            <PolarRadiusAxis angle={30} domain={[0, 100]} />
                             <Radar name="Average" dataKey="B" stroke="#FFC9F6" fill="#FFC9F6" fillOpacity={0.6} />
                             <Radar name="You" dataKey="A" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
                             <Legend />

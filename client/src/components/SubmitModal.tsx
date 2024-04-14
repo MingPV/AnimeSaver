@@ -66,7 +66,7 @@ const SubmitModal: FC<Props> = ({ animeList, setAnimeList, animeName, setNameInF
         axios.post(url, {
             name: name,
             point: point,
-            type: genre,
+            genre: genre,
             description: description
         }).then(res => {
             console.log(res.data)

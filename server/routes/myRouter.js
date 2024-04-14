@@ -54,7 +54,7 @@ router.post("/recieveForm", async (req, res) => {
     let data = new Product({
         animeName: req.body.name,
         point: req.body.point,
-        type: req.body.type,
+        genre: req.body.genre,
         description: req.body.description,
     })
 
