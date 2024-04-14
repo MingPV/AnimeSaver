@@ -29,6 +29,7 @@ import HotelRoundedIcon from '@mui/icons-material/HotelRounded';
 import Done from '@mui/icons-material/Done';
 import MenuIcon from '@mui/icons-material/Menu';
 import HourglassTopIcon from '@mui/icons-material/HourglassTop';
+import CloudIcon from '@mui/icons-material/Cloud';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import PublicIcon from '@mui/icons-material/Public';
 import PersonIcon from '@mui/icons-material/Person';
@@ -36,6 +37,10 @@ import ListofAnime from './ListofAnime';
 // import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from 'recharts';
 import { Radar, RadarChart, PolarGrid, Legend, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
 import { useEffect, useState } from 'react';
+import Favorite from '@mui/icons-material/Favorite';
+import ListIcon from '@mui/icons-material/List';
+import ViewListIcon from '@mui/icons-material/ViewList';
+import ComputerIcon from '@mui/icons-material/Computer';
 
 interface Anime {
     animeName: string;
@@ -249,7 +254,7 @@ export default function DrawerFilters() {
                                     {[
                                         {
                                             name: 'Anime List',
-                                            icon: <HomeRoundedIcon />,
+                                            icon: <ComputerIcon />,
                                         },
                                         {
                                             name: 'Statistics',
